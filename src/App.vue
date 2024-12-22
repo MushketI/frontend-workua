@@ -1,25 +1,38 @@
-<script setup>
-import HelloWorld from "./components/HelloWorld.vue"
-</script>
-
 <template>
   <div>
-    <h2>Test</h2>
+    <Header />
+    <router-view></router-view>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup>
+import { onMounted } from "vue"
+import { useAuthStore } from "./store/authStore"
+import Header from "./pages/headerPage/Header.vue"
+
+const authStore = useAuthStore()
+
+onMounted(() => {
+  authStore.getUser()
+  console.log("App onMounted")
+})
+</script>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 </style>
